@@ -34,30 +34,60 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   if (input === '小黑') {
     return res.reply("不要叫我小黑，要黑我女王大人啊……");
     console.log(text);
-  }
-
-  if (input == '一站到底' || input == '取题' || input.toLowerCase() == 'qt'){
+  }else if (input == '一站到底' || input == '取题' || input.toLowerCase() == 'qt'){
     yzdd.next(message, function(text){
       res.reply(text);
       console.log(text);
     });
-  }
-
-  if (input.toLowerCase() == 'a' || input.toLowerCase()  == 'b' || input.toLowerCase()  == 'c' || input.toLowerCase()  == 'd'){
+  }else if (input.toLowerCase() == 'a' || input.toLowerCase()  == 'b' || input.toLowerCase()  == 'c' || input.toLowerCase()  == 'd'){
     yzdd.check(input, message, function(text){
       res.reply(text);
       console.log(text);
     });
-  }
-
-  if(input == '分数' || input.toLowerCase() == 'fs'){
+  }else if(input == '分数' || input.toLowerCase() == 'fs'){
     yzdd.score(message, function(text){
       res.reply(text);
       console.log(text);
     });
-  }
-
-  if(input.substring(0,2).toLowerCase() == 'zc'){
+  }else if(input == '猜电影'){
+    res.reply([
+      {
+        title: '第一题，简单！',
+        description: '美国好莱坞早期的经典电影，就是太经典了，所以这部是由当年当红帅哥+两大美女重拍的版本，电影的构思非常巧妙，结局和昨天猜的一部电影有异曲同工之妙。温馨提示：看到这张剧照，除了人，你还看到了什么？想到了什么？',
+        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYSGIXjeBJRo48Aw9Dyt5KZKKRfxKuw9ZTx99APwcK4fWrKT8kzKuM0qQ/0',
+        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155297&idx=1&sn=0c6495896dbabbb729c6e34cf29f0920#rd'
+      }
+    ]);
+  }else if(input == '香草的天空'){
+    res.reply([
+      {
+        title: '第二题，不要掉以轻心哦~',
+        description: ' 中国电影 这部电影的剧照特色太鲜明了，一看就猜的到，所以小编特意选了这张图。总而言之一句话，大制作大牌演员，连里面的歌都那么的红。',
+        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYSQfI7neJbCDuvB8EQ7xBj08icRCuibxv4eHDN0VUqg31lsoNA8nxVgo9g/0',
+        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155300&idx=1&sn=fa3ec0e9a8d3475fe4c1a06b1b01637c#rd'
+      }
+    ]);
+  }else if(input == '满城尽带黄金甲'){
+    res.reply([
+      {
+        title: '第三题，放马过来吧！~',
+        description: '    四个字的电影名称，韩国动作电影，当年男神回归之作，揭发了一个很黑暗很血腥很无人道的地下交易。这部电影好多翻译，小编用的是百度百科的中文名，但是其实大家比较熟知的估计是台湾版的翻译（2个字的）。',
+        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYShBibKStOp541hRicVhHaIhibs7QJIUBqXicibMBkGzib2aPShpSDE3ukXgmg/0',
+        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155303&idx=1&sn=7f5610940849ee24e637777576c23a8b#rd'
+      }
+    ]);
+  }else if(input == '孤胆特工'){
+    res.reply([
+      {
+        title: '最后一题了，再好好想想？~',
+        description: ' 美国剧情电影 此片全程都是在室内交谈，非常平淡，但是剧情却非常精彩，毫不枯燥。此片的内容和前段时间大热的某部电视剧的背景有点相似哦。',
+        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYSibu3e0icg6AwgafjoJHaicFlYQaEbqC5vpheuYsJsfOiavb9UDWKTDrTCQ/0',
+        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155312&idx=1&sn=80a9f237941cad39c6d922f2b50757a1#rd'
+      }
+    ]);
+  }else if(input == '这个男人来自地球'){
+    res.reply('恭喜你！这么难都答对了~本次的规则是全部答对的第30个幸运者，祝你幸运哦！');
+  }else if(input.substring(0,2).toLowerCase() == 'zc'){
     var reg = /^[zZ][cC]\+?(1\d{10})\+?([A-Ea-e])$/;//匹配中间可选的+号，匹配赛区大小写
     input = input.replace(/\s+/g,"");//去空格
     var match = input.match(reg);
@@ -72,12 +102,11 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
         res.reply(text);
       });
     }
-  }
-
-  if(input.substring(0,2) == '注册'){
+  }else if(input.substring(0,2) == '注册'){
     res.reply('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.测试赛区1\nB.测试赛区2\nC.测试赛区3\nD.测试赛区4\nE.测试赛区5')
+  }else{
+    res.reply('亲爱的微友你好，如果我们没有及时回复您的消息，请耐心等待一下，工作人员会尽快与您取得联系的。谢谢支持！你还可以在掌上大江网http://3g.jxnews.com.cn看更多有趣的新闻。');
   }
-
 /*以下内容几乎不需要使用
   var data = alpha.search(input);
   var content = '';
