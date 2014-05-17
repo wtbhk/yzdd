@@ -156,7 +156,7 @@ yzdd.register = function(info, message, callback) {
 	});
 }
 
-yzdd._calcScore = function(time, score) {
+yzdd._calcScore = function(time, score) {	//根据答题时间计算分数
 	if(time <= 60){
 		return score;
 	}else{
