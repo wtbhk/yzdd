@@ -103,6 +103,8 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
         res.reply(text);
       });
     }
+  }else if(input == '规则'){
+    res.reply('规则编辑中请稍等');
   }else if(input.substring(0,2) == '注册'){
     res.reply('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.财大赛区\nF.社会及昌外赛区\n你还可以回复 规则 查看比赛规则');
   }else{
