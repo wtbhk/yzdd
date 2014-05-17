@@ -20,7 +20,7 @@ yzdd.next = function(message, callback) {
 	var _getNextQuestion = yzdd._getNextQuestion;
 	_status('REGISTER', function(status){
 		if(status){
-			return callback('未注册，请先回复 注册');
+			return callback('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区');
 		}else{
 			_status('QUESTION', function(status){
 				if(!status){
@@ -58,7 +58,7 @@ yzdd.check = function(answer, message, callback) {
 
 	yzdd._status('REGISTER', function(status){
 		if(status){
-			return callback('未注册，请先回复 注册');
+			return callback('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区');
 		}
 		yzdd._status('ANSWER', function(status){
 			if(status){
