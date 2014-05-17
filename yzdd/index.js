@@ -5,7 +5,7 @@ var yzdd = function() {
 exports.create = function() {
 	yzdd.redis = require('redis').createClient();
 	yzdd.redis_prename = 'yzdd_';
-	yzdd.questions_per_group = 5;
+	yzdd.questions_per_group = 10;
 	yzdd.score_per_question = 10;
 	return yzdd;
 }
@@ -87,9 +87,9 @@ yzdd.check = function(answer, message, callback) {
 											})
 											console.log('check starttime:',starttime,' endtime:',message.CreateTime)
 											if(isTrue){
-												callback('回答正确，本组题目回答完毕，得分'+score+'分\n请回复 取题 或 qt 取题');
+												callback('回答正确，本组题目回答完毕，得分'+score+'分\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs');
 											}else{
-												callback('回答错误，本组题目回答完毕，得分'+score+'分\n请回复 取题 或 qt 取题');
+												callback('回答错误，本组题目回答完毕，得分'+score+'分\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs');
 											}
 										});	
 									});
@@ -143,9 +143,9 @@ yzdd.register = function(info, message, callback) {
 				multi.sadd(_keys('users'), message.FromUserName);
 				multi.hmset(_keys('user_', message.FromUserName), info);
 				multi.sadd(_keys('phones'), info.phone);
-				multi.zadd(_keys('rank'), 0, message.FromUserName);//初始化总排名
-				multi.zadd(_keys('rank_', info.zone), 0, message.FromUserName);//初始化赛区排名
-				multi.set(_keys('user_score', message.FromUserName), 0);
+				multi.zadd(_keys('rank'), 20, message.FromUserName);//初始化总排名
+				multi.zadd(_keys('rank_', info.zone), 20, message.FromUserName);//初始化赛区排名
+				multi.set(_keys('user_score', message.FromUserName), 20);
 				multi.exec(function(err, replies){
 					_setStatus('REGISTER');
 					callback('注册成功，回复 取题 或 qt 取题目');
@@ -160,7 +160,7 @@ yzdd._calcScore = function(time, score) {	//根据答题时间计算分数
 	if(time <= 60){
 		return score;
 	}else{
-		score = score * (300 - time)/240;
+		score = score * (360 - time)/300;
 		return (score < 0 ? 0 : score);
 	}
 }
