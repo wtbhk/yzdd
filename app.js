@@ -88,16 +88,16 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   }else if(input == '这个男人来自地球'){
     res.reply('恭喜你！这么难都答对了~本次的规则是全部答对的第30个幸运者，祝你幸运哦！');
   }else if(input.substring(0,2).toLowerCase() == 'zc'){
-    var reg = /^([u4e00-u9fa5]{2,4})\+?(1\d{10})\+?([A-Fa-f])$/;//匹配中间可选的+号，匹配赛区大小写
+    var reg = /^([\u4e00-\u9fa5]{2,4})\+?(1\d{10})\+?([A-Fa-f])$/;//匹配中间可选的+号，匹配赛区大小写
     input = input.replace(/\s+/g,"");//去空格
     var match = input.match(reg);
     if(!input.match(reg)){
       res.reply('您的格式有误，请重试');
     }else{
       //console.log(match);
-      var name = match[0];
-      var phone = match[1];
-      var zone = match[2].toUpperCase();
+      var name = match[1];
+      var phone = match[2];
+      var zone = match[3].toUpperCase();
       var info = {name:name, phone:phone, zone:zone};
       yzdd.register(info, message, function(text){
         res.reply(text);
