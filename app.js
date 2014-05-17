@@ -88,22 +88,23 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   }else if(input == '这个男人来自地球'){
     res.reply('恭喜你！这么难都答对了~本次的规则是全部答对的第30个幸运者，祝你幸运哦！');
   }else if(input.substring(0,2).toLowerCase() == 'zc'){
-    var reg = /^[zZ][cC]\+?(1\d{10})\+?([A-Ea-e])$/;//匹配中间可选的+号，匹配赛区大小写
+    var reg = /^([\u4e00-\u9fa5]{2,4})\+?(1\d{10})\+?([A-Ea-e])$/;//匹配中间可选的+号，匹配赛区大小写
     input = input.replace(/\s+/g,"");//去空格
     var match = input.match(reg);
     if(!input.match(reg)){
       res.reply('您的格式有误，请重试');
     }else{
       //console.log(match);
+      var name = match[0];
       var phone = match[1];
       var zone = match[2].toUpperCase();
-      var info = {phone:phone, zone:zone};
+      var info = {name:name, phone:phone, zone:zone};
       yzdd.register(info, message, function(text){
         res.reply(text);
       });
     }
   }else if(input.substring(0,2) == '注册'){
-    res.reply('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区')
+    res.reply('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区\n你还可以回复 规则 查看比赛规则');
   }else{
     res.reply('亲爱的微友你好，如果我们没有及时回复您的消息，请耐心等待一下，工作人员会尽快与您取得联系的。谢谢支持！你还可以在掌上大江网http://3g.jxnews.com.cn看更多有趣的新闻。');
   }

@@ -20,7 +20,7 @@ yzdd.next = function(message, callback) {
 	var _getNextQuestion = yzdd._getNextQuestion;
 	_status('REGISTER', function(status){
 		if(status){
-			return callback('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区');
+			return callback('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区\n你还可以回复 规则 查看比赛规则');
 		}else{
 			_status('QUESTION', function(status){
 				if(!status){
@@ -58,7 +58,7 @@ yzdd.check = function(answer, message, callback) {
 
 	yzdd._status('REGISTER', function(status){
 		if(status){
-			return callback('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区');
+			return callback('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区\n你还可以回复 规则 查看比赛规则');
 		}
 		yzdd._status('ANSWER', function(status){
 			if(status){
