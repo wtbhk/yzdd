@@ -32,9 +32,9 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   var input = (message.Content || '').trim();
 
   if (input === '小黑') {
-    return res.reply("不要叫我小黑，要黑我女王大人啊……");
+    return res.reply("不要叫我小黑，要叫我女王大人啊……");
     console.log(text);
-  }else if (input == '一站到底' || input == '取题' || input.toLowerCase() == 'qt'){
+  }else if (input == '我要参赛' || input == '智王' || input == '取题' || input.toLowerCase() == 'qt'){
     yzdd.next(message, function(text){
       res.reply(text);
       console.log(text);
@@ -103,7 +103,7 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
       });
     }
   }else if(input.substring(0,2) == '注册'){
-    res.reply('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.测试赛区1\nB.测试赛区2\nC.测试赛区3\nD.测试赛区4\nE.测试赛区5')
+    res.reply('请回复 zc+手机号+赛区号 进行注册\n例如 zc13545678912C\n\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.社会及昌外赛区')
   }else{
     res.reply('亲爱的微友你好，如果我们没有及时回复您的消息，请耐心等待一下，工作人员会尽快与您取得联系的。谢谢支持！你还可以在掌上大江网http://3g.jxnews.com.cn看更多有趣的新闻。');
   }
