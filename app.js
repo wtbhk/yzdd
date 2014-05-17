@@ -90,7 +90,7 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   }else if(input == '规则'){
     res.reply('江西高校智王大赛规则如下：\n每组有10道题，每道题目答对记10分\n每组10道问题回答完毕计算该组用时\n该组用时1分钟以内得全分，用时6分钟以上得0分，1-6分钟部分按时间打折\n计算后的该组得分计入总得分\例：答对3题用时2分钟得分为 3*10*((6-2)/5) = 24');
   }else if(input == '异度支付'){
-    res.reply('异度支付客户端下载地址：\nIOS用户：https://itunes.apple.com/cn/app/yi-du-zhi-fu/id800578884\n安卓用户(Google Play)：https://play.google.com/store/apps/details?id=com.citicbank.cyberpay.ui');
+    res.reply('中信银行异度支付客户端下载地址：\nIOS用户：https://itunes.apple.com/cn/app/yi-du-zhi-fu/id800578884\n安卓用户(Google Play)：https://play.google.com/store/apps/details?id=com.citicbank.cyberpay.ui');
   }else if(input.substring(0,2) == '注册'){
     res.reply('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区\nB.经开赛区\nC.昌西赛区\nD.昌北赛区\nE.财大赛区\nF.社会及昌外赛区\n你还可以回复“规则”查看比赛规则，回复“异度支付”了解下载详情。');
   }else{
