@@ -88,7 +88,7 @@ yzdd.check = function(answer, message, callback) {
 											console.log('check starttime:',starttime,' endtime:',message.CreateTime)
 											if(isTrue){
 												yzdd.score(yzdd.message, function(msg){
-													msg = '回答正确，本组题目回答完毕。本组得分'+score+'分\n' + msg;
+													msg = '回答正确，本组题目回答完毕，本组得分'+score+'分\n' + msg;
 													msg += '\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs';
 													callback(msg);
 												});
@@ -132,7 +132,7 @@ yzdd.score = function(message, callback) {
 				yzdd.redis.zcount(_keys('rank_', zone), '-inf', '+inf', function(err, count){
 					rank++;
 					count = count - rank;
-					callback('你的总分数是'+totalscore+'分\n在赛区'+zone+'中排名'+rank+'名，打败了'+count+'个同学');
+					callback('你的总分数是'+totalscore+'分\n在赛区'+zone+'中排名第'+rank+'名，打败了'+count+'个同学');
 				});
 			});
 		});
