@@ -5,7 +5,7 @@ var yzdd = function() {
 exports.create = function() {
 	yzdd.redis = require('redis').createClient();
 	yzdd.redis_prename = 'yzdd_';
-	yzdd.questions_per_group = 10;
+	yzdd.questions_per_group = 5;
 	yzdd.score_per_question = 10;
 	return yzdd;
 }
@@ -87,9 +87,17 @@ yzdd.check = function(answer, message, callback) {
 											})
 											console.log('check starttime:',starttime,' endtime:',message.CreateTime)
 											if(isTrue){
-												callback('回答正确，本组题目回答完毕，得分'+score+'分\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs');
+												yzdd.score(yzdd.message, function(msg){
+													msg = '回答正确，本组题目回答完毕。本组得分'+score+'分\n' + msg;
+													msg += '\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs';
+													callback(msg);
+												});
 											}else{
-												callback('回答错误，本组题目回答完毕，得分'+score+'分\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs');
+												yzdd.score(yzdd.message, function(msg){
+													msg = '回答错误，本组题目回答完毕。本组得分'+score+'分\n' + msg;
+													msg += '\n请回复 取题 或 qt 取题\n查询分数请回复 分数 或 fs';
+													callback(msg);
+												});
 											}
 										});	
 									});

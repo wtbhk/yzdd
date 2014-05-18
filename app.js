@@ -88,7 +88,7 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   }else if(input == '这个男人来自地球'){
     res.reply('恭喜你！这么难都答对了~本次的规则是全部答对的第30个幸运者，祝你幸运哦！');
   }else if(input == '规则'){
-    res.reply('江西高校智王大赛规则如下：\n每组有10道题，每道题目答对记10分；\n每组10道问题回答完毕计算该组用时；\n该组用时1分钟以内得全分，用时6分钟以上得0分，1-6分钟部分按时间打折；\n计算后的该组得分计入总得分。\n例：答对3题用时2分钟得分为 3*10*((6-2)/5) = 24');
+    res.reply('江西高校智王大赛规则如下：\n每组有5道题，每道题目答对记10分；\n每组5道问题回答完毕计算该组用时；\n该组用时1分钟以内得全分，用时6分钟以上得0分，1-6分钟部分按时间打折；\n计算后的该组得分计入总得分。\n例：答对3题用时2分钟得分为 3*10*((6-2)/5) = 24');
   }else if(input == '异度支付'){
     res.reply('中信银行异度支付客户端下载地址：\nIOS用户：https://itunes.apple.com/cn/app/yi-du-zhi-fu/id800578884\n安卓用户(Google Play)：https://play.google.com/store/apps/details?id=com.citicbank.cyberpay.ui');
   }else if(input.substring(0,2) == '注册'){
