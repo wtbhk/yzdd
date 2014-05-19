@@ -92,7 +92,7 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
   }else if(input == '异度支付'){
     res.reply('中信银行异度支付客户端下载地址：\nIOS用户：https://itunes.apple.com/cn/app/yi-du-zhi-fu/id800578884\n安卓用户(Google Play)：https://play.google.com/store/apps/details?id=com.citicbank.cyberpay.ui');
   }else if(input.substring(0,2) == '注册'){
-    res.reply('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区(师大承办)\nB.经开赛区(农大承办)\nC.昌西赛区(交大承办)\nD.昌北赛区(东理承办)\nE.财大赛区(财大承办)\nF.社会及昌外赛区\n你还可以回复“规则”查看比赛规则，回复“异度支付”了解下载详情。');
+    res.reply('欢迎您来到江西高校大学生智王大赛官方平台，请先下载“异度支付”客户端，并将注册时的姓名、手机和您希望参加的赛区回复到本微信\n如 李四13545678912C\n目前赛区有：\nA.瑶湖赛区(师大承办)\nB.经开赛区(农大承办)\nC.昌西赛区(交大承办)\nD.昌北赛区(东理承办)\nE.财大赛区(财大承办)\nF.社会及昌外赛区\n你还可以回复“规则”查看比赛规则，回复“异度支付”了解下载详情。\n题库不断更新，欢迎您每天来发现不同哦～');
   }else{
     var reg = /^([\u4e00-\u9fa5]{2,4})\+?(1\d{10})\+?([A-Fa-f])$/;//匹配中间可选的+号，匹配赛区大小写
     input = input.replace(/\s+/g,"");//去空格
