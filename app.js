@@ -27,7 +27,11 @@ app.use(connect.query());
 app.use(connect.static(__dirname + '/assets', { maxAge: 86400000 }));
 app.use(connect.cookieParser());
 app.use(connect.session({secret: config.secret}));
-app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res) {
+app.use('/wechat', wechat(config.token, wechat.event(function (message, req, res, next){
+  if(message.Event.toLowerCase()=='subscribe'){
+    res.reply('欢迎关注大江网微信公众平台，参加江西高校智王大赛请回复“我要参赛”');
+  }
+}).text(function (message, req, res, next) {
   console.log(message);
   var input = (message.Content || '').trim();
 
@@ -50,43 +54,7 @@ app.use('/wechat', wechat(config.token, wechat.text(function (message, req, res)
       console.log(text);
     });
   }else if(input == '猜电影'){
-    res.reply([
-      {
-        title: '第一题，简单！',
-        description: '美国好莱坞早期的经典电影，就是太经典了，所以这部是由当年当红帅哥+两大美女重拍的版本，电影的构思非常巧妙，结局和昨天猜的一部电影有异曲同工之妙。温馨提示：看到这张剧照，除了人，你还看到了什么？想到了什么？',
-        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYSGIXjeBJRo48Aw9Dyt5KZKKRfxKuw9ZTx99APwcK4fWrKT8kzKuM0qQ/0',
-        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155297&idx=1&sn=0c6495896dbabbb729c6e34cf29f0920#rd'
-      }
-    ]);
-  }else if(input == '香草的天空'){
-    res.reply([
-      {
-        title: '第二题，不要掉以轻心哦~',
-        description: ' 中国电影 这部电影的剧照特色太鲜明了，一看就猜的到，所以小编特意选了这张图。总而言之一句话，大制作大牌演员，连里面的歌都那么的红。',
-        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYSQfI7neJbCDuvB8EQ7xBj08icRCuibxv4eHDN0VUqg31lsoNA8nxVgo9g/0',
-        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155300&idx=1&sn=fa3ec0e9a8d3475fe4c1a06b1b01637c#rd'
-      }
-    ]);
-  }else if(input == '满城尽带黄金甲'){
-    res.reply([
-      {
-        title: '第三题，放马过来吧！~',
-        description: '    四个字的电影名称，韩国动作电影，当年男神回归之作，揭发了一个很黑暗很血腥很无人道的地下交易。这部电影好多翻译，小编用的是百度百科的中文名，但是其实大家比较熟知的估计是台湾版的翻译（2个字的）。',
-        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYShBibKStOp541hRicVhHaIhibs7QJIUBqXicibMBkGzib2aPShpSDE3ukXgmg/0',
-        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155303&idx=1&sn=7f5610940849ee24e637777576c23a8b#rd'
-      }
-    ]);
-  }else if(input == '孤胆特工'){
-    res.reply([
-      {
-        title: '最后一题了，再好好想想？~',
-        description: ' 美国剧情电影 此片全程都是在室内交谈，非常平淡，但是剧情却非常精彩，毫不枯燥。此片的内容和前段时间大热的某部电视剧的背景有点相似哦。',
-        picurl: 'http://mmbiz.qpic.cn/mmbiz/ibaGbbXO34h5KDmVMLyCZMBbex3jHquYSibu3e0icg6AwgafjoJHaicFlYQaEbqC5vpheuYsJsfOiavb9UDWKTDrTCQ/0',
-        url: 'http://mp.weixin.qq.com/s?__biz=MjM5ODUwMDczMg==&mid=200155312&idx=1&sn=80a9f237941cad39c6d922f2b50757a1#rd'
-      }
-    ]);
-  }else if(input == '这个男人来自地球'){
-    res.reply('恭喜你！这么难都答对了~本次的规则是全部答对的第30个幸运者，祝你幸运哦！');
+    res.reply('5月猜电影活动已经结束了，感谢大家的支持，敬请期待我们的下一次活动哦~');
   }else if(input == '规则'){
     res.reply('江西高校智王大赛规则如下：\n每组有5道题，每道题目答对记10分；\n每组5道问题回答完毕计算该组用时；\n该组用时1分钟以内得全分，用时6分钟以上得0分，1-6分钟部分按时间打折；\n计算后的该组得分计入总得分。\n例：答对3题用时2分钟得分为 3*10*((6-2)/5) = 24');
   }else if(input == '异度支付'){
