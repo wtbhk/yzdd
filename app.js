@@ -151,10 +151,7 @@ app.use('/ecjtu', function (req, res) {
   res.end('ecjtu');
 });
 
-app.use('/', function (req, res) {
-  res.writeHead(200);
-  res.end('hello node ecjtu');
-});
+
 
 app.use('/status', function (req, res){
   var output;
@@ -172,6 +169,10 @@ app.use('/status', function (req, res){
   res.end(output);
 });
 
+app.use('/', function (req, res) {
+  res.writeHead(200);
+  res.end('hello node ecjtu');
+});
 
 /**
  * Error handler
