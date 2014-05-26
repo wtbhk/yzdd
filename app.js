@@ -7,6 +7,7 @@ var wechat = require('wechat');
 var config = require('./config');
 var alpha = require('alpha');
 var ejs = require('ejs');
+var redis = require('redis').createClient();
 var yzdd = require('./yzdd').create();
 var worker = require('pm').createWorker();
 
@@ -155,6 +156,21 @@ app.use('/', function (req, res) {
   res.end('hello node ecjtu');
 });
 
+app.use('status', function (req, res){
+  var output;
+  redis.smembers('yzdd_users', function (err, members) {
+    output += '总人数:'+members.length+'<br/>';
+    for(var i=0;i<members.length;i++) {
+      redis.hgetall('yzdd_user:'+members[i], function (err, member){
+        redis.get('yzdd_user:'+members[i]+':score', function (err, score){
+          output += 'user:'+members[i]+':'+member['phone']+':'+member['zone']+':'+score+'<br/>';
+        });
+      });
+    }
+  });
+  res.writeHead(200); 
+  res.end(output);
+});
 
 
 /**
