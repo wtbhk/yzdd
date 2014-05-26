@@ -156,12 +156,12 @@ app.use('/ecjtu', function (req, res) {
 app.use('/status', function (req, res){
   var output='';
   redis.smembers('yzdd_users', function (err, members) {
-    output += '总人数:'+members.length+'\n';
+    res.write('总人数:'+members.length+'\n');
     var j = 0;
     for(var i=0;i<members.length;i++) {
-      redis.hgetall('yzdd_user:'+members[i], function (err, member){
-        redis.get('yzdd_user:'+members[i]+':score', function (err, score){
-          res.write('user:'+members[i]+':'+member['phone']+':'+member['zone']+':'+score+'\n');
+      redis.hgetall('yzdd_user:'+members[i], function (err, member) {
+        redis.get('yzdd_user:'+members[i]+':score', function (err, score) {
+          res.write(members[i]+':'+member['phone']+':'+member['zone']+':'+score+'\n');
           j+=1;
           if(j==members.length){
             res.end();
