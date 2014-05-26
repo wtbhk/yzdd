@@ -160,7 +160,7 @@ app.use('/status', function (req, res){
     var j = 0;
     for(var i=0;i<members.length;i++) {
       var id = members[i];
-      redis.multi.hgetall('yzdd_user:'+id).get('yzdd_user:'+id+':score').exec(function (err, replies) {
+      redis.multi().hgetall('yzdd_user:'+id).get('yzdd_user:'+id+':score').exec(function (err, replies) {
         res.write(replies);
         j+=1;
         if(j==members.length){
