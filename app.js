@@ -164,9 +164,10 @@ app.use('/status', function (req, res){
         });
       });
     }
+    res.writeHead(200); 
+    res.end(output);
   });
-  res.writeHead(200); 
-  res.end(output);
+  
 });
 
 app.use('/', function (req, res) {
