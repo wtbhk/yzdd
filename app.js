@@ -159,9 +159,10 @@ app.use('/status', function (req, res){
     res.write('总人数:'+members.length+'\n');
     var j = 0;
     for(var i=0;i<members.length;i++) {
-      redis.hgetall('yzdd_user:'+members[i], function (err, member) {
-        redis.get('yzdd_user:'+members[i]+':score', function (err, score) {
-          res.write(members[i]+':'+member['phone']+':'+member['zone']+':'+score+'\n');
+      var id = members[i];
+      redis.hgetall('yzdd_user:'+id, function (err, member) {
+        redis.get('yzdd_user:'+id+':score', function (err, score) {
+          res.write(id+':'+member['phone']+':'+member['zone']+':'+score+'\n');
           j+=1;
           if(j==members.length){
             res.end();
