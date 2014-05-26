@@ -154,18 +154,16 @@ app.use('/ecjtu', function (req, res) {
 
 
 app.use('/status', function (req, res){
-  var output;
+  var output='';
   redis.smembers('yzdd_users', function (err, members) {
-    output += '总人数:'+members.length+'<br/>';
+    output += '总人数:'+members.length+'\n';
     for(var i=0;i<members.length;i++) {
       redis.hgetall('yzdd_user:'+members[i], function (err, member){
         redis.get('yzdd_user:'+members[i]+':score', function (err, score){
-          output += 'user:'+members[i]+':'+member['phone']+':'+member['zone']+':'+score+'<br/>';
+          res.write('user:'+members[i]+':'+member['phone']+':'+member['zone']+':'+score+'\n');
         });
       });
     }
-    res.writeHead(200); 
-    res.end(output);
   });
   
 });
