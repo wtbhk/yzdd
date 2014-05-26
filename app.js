@@ -161,7 +161,9 @@ app.use('/status', function (req, res){
     for(var i=0;i<members.length;i++) {
       var id = members[i];
       redis.multi().hgetall('yzdd_user:'+id).get('yzdd_user:'+id+':score').exec(function (err, replies) {
-        res.write(replies);
+        replies.forEach(function (reply, index) {
+          res.write(index + ": " + reply.toString());
+        });
         j+=1;
         if(j==members.length){
           res.end();
