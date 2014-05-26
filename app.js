@@ -156,7 +156,7 @@ app.use('/', function (req, res) {
   res.end('hello node ecjtu');
 });
 
-app.use('status', function (req, res){
+app.use('/status', function (req, res){
   var output;
   redis.smembers('yzdd_users', function (err, members) {
     output += '总人数:'+members.length+'<br/>';
