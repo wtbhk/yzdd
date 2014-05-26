@@ -160,14 +160,12 @@ app.use('/status', function (req, res){
     var j = 0;
     for(var i=0;i<members.length;i++) {
       var id = members[i];
-      redis.hgetall('yzdd_user:'+id, function (err, member) {
-        redis.get('yzdd_user:'+id+':score', function (err, score) {
-          res.write(id+':'+member['phone']+':'+member['zone']+':'+score+'\n');
+      redis.multi.hgetall('yzdd_user:'+id).get('yzdd_user:'+id+':score').exec(function (err, replies) {
+        res.write(replies);
           j+=1;
           if(j==members.length){
             res.end();
           }
-        });
       });
     }
   });
